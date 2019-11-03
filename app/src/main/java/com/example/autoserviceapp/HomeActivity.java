@@ -18,6 +18,7 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.btm_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
@@ -32,5 +33,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.main);
+
     }
 }
