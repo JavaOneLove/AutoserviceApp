@@ -32,6 +32,8 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
         TextView addressText = v.findViewById(R.id.textAddress);
         TextView webSiteText = v.findViewById(R.id.textWebSite);
         phoneText.setOnClickListener(this);
+        emailText.setOnClickListener(this);
+        webSiteText.setOnClickListener(this);
         phoneText.setText("Номер телефона: " + phone);
         emailText.setText("Email:: " + email);
         addressText.setText("Физический адрес:: " + address);
@@ -45,5 +47,17 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
         callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         callIntent.setData(Uri.parse("tel:" + phone));
         getActivity().startActivity(callIntent);
+    }
+    public void onClickEmail(View v){
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/html");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+        getActivity().startActivity(Intent.createChooser(emailIntent, "Send Email"));
+    }
+    public void onClickWebSite(View v){
+        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(webSite));
+        getActivity().startActivity(webIntent);
     }
 }

@@ -93,8 +93,10 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
+        android:clickable="true"
         android:drawableRight="@drawable/ic_email"
         android:linksClickable="true"
+        android:onClick="onClickEmail"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
@@ -111,6 +113,8 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
+        android:clickable="true"
         android:drawableRight="@drawable/ic_web"
+        android:onClick="onClickWebSite"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 </RelativeLayout>
