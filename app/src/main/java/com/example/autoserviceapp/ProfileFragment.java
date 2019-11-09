@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 
 /**
@@ -15,17 +16,20 @@ import android.view.ViewGroup;
  */
 public class ProfileFragment extends Fragment {
 
-
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
+    EditText editName;
+    EditText editSurname;
+    EditText editEmail;
+    EditText editPhone;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+       editName = v.findViewById(R.id.editTextName);
+       editSurname = v.findViewById(R.id.editTextSurname);
+       editEmail = v.findViewById(R.id.editTextEmail);
+       editPhone = v.findViewById(R.id.editTextPhone);
+        return v;
     }
 
 }
