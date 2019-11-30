@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -55,6 +56,10 @@ public class HomeActivity extends AppCompatActivity {
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, fragment);
                     fragmentTransaction.commit();
+                }
+                if (id == R.id.auth) {
+                    Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                    startActivity(LoginIntent);
                 }
                 return true;
             }
