@@ -4,6 +4,23 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textRedirectToRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonLogIn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="125dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="Ещё не зарегестрированы?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#2196F3"
+        android:textColorLink="#03A9F4" />
+
+    <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +98,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="315dp"
+        android:clickable="true"
+        android:onClick="OnClickLoggin"
         android:text="Войти" />
 
     <Button
