@@ -1,29 +1,29 @@
 package com.example.autoserviceapp.model;
 
+
+import com.google.gson.annotations.SerializedName;
+
 public class User {
-    private int id;
+    private String Username;
+    @SerializedName("email")
     private String Email;
+    @SerializedName("password")
     private String Password;
 
     public User(String email, String password) {
-        Email = email;
-        Password = password;
+        this.Email = email;
+        this.Password = password;
     }
 
-    public int getId() {
-        return id;
+    public User() {
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public String getEmail() {
         return Email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.Email = email;
     }
 
     public String getPassword() {
@@ -31,6 +31,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.Password = password;
     }
 }

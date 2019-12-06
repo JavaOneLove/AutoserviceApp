@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textPassword = findViewById(R.id.editPasswordLog);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.15.8080")
+                .baseUrl("http://192.168.0.15:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void Loggin(){
-        User user = new User(textEmail.toString(),textPassword.toString());
+        User user = new User();
         Call<User> call = jsonPlaceHolderApi.Loggin(user);
 
         call.enqueue(new Callback<User>() {

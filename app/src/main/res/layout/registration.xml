@@ -57,7 +57,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <EditText
-        android:id="@+id/EditMailRegistration"
+        android:id="@+id/editMailRegistration"
         android:layout_width="241dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
@@ -69,13 +69,14 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/textView12"
-        android:layout_toRightOf="@+id/textView12" />
+        android:layout_toRightOf="@+id/textView12"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/editPasswordRegistration"
         android:layout_width="241dp"
         android:layout_height="30dp"
-        android:layout_below="@id/EditMailRegistration"
+        android:layout_below="@id/editMailRegistration"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="10dp"
@@ -84,7 +85,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/textView13"
-        android:layout_toRightOf="@+id/textView13" />
+        android:layout_toRightOf="@+id/textView13"
+        android:inputType="textPassword"/>
 
     <EditText
         android:id="@+id/editRePasswordRegistration"
@@ -99,7 +101,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/textView14"
-        android:layout_toRightOf="@+id/textView14" />
+        android:layout_toRightOf="@+id/textView14"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/buttonRegistration"
@@ -107,6 +110,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="360dp"
+        android:clickable="true"
+        android:onClick="onClickRegistration"
         android:text="Зарегестрироваться" />
 
     <Button
