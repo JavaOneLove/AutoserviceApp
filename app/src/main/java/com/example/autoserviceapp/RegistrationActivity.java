@@ -38,7 +38,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void Registration(){
-        User user = new User(EmailText.toString(),PasswordText.toString());
+        User user = new User("",EmailText.getText().toString(),PasswordText.getText().toString());
         Call<User> call = jsonPlaceHolderApi.Registration(user);
 
         call.enqueue(new Callback<User>() {

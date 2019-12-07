@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public int role = 0; // 0 is no auth, 1 is auth, 2 is manager, 3 is administrator
+    public int role = 2; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,12 @@ public class HomeActivity extends AppCompatActivity {
                 if (id == R.id.auth) {
                     Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
                     startActivity(LoginIntent);
+                }
+                if (id == R.id.user_list){
+                    UserListFragment fragment = new UserListFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout,fragment);
+                    fragmentTransaction.commit();
                 }
                 return true;
             }
