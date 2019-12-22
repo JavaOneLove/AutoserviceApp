@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
 
     <TextView
         android:id="@+id/textRedirectToRegistration"
@@ -10,9 +12,9 @@
         android:layout_below="@+id/buttonLogIn"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="60dp"
         android:clickable="true"
         android:onClick="onClick"
         android:text="Ещё не зарегестрированы?"
@@ -27,91 +29,80 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginLeft="153dp"
+        android:layout_marginTop="127dp"
         android:text="Вход"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#C4BBBB"
         android:textSize="40dp" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="220dp"
-        android:text="Email:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView10"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Password:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <EditText
         android:id="@+id/editEmailLog"
-        android:layout_width="241dp"
-        android:layout_height="30dp"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textView10"
-        android:layout_toRightOf="@+id/textView10"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="15sp"
+        android:hint="Email"
+        android:background="@drawable/fileds"
+        android:textColor="@color/colorAccent"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editPasswordLog"
-        android:inputType="textPassword"
-        android:layout_width="241dp"
-        android:layout_height="31dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editEmailLog"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="269dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textView10"
-        android:layout_toRightOf="@+id/textView10" />
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="15sp"
+        android:hint="Пароль"
+        android:background="@drawable/fileds"
+        android:textColor="@color/colorAccent"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonLogIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="315dp"
+        android:layout_below="@+id/editPasswordLog"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="120dp"
+        android:background="@drawable/button"
         android:clickable="true"
         android:onClick="OnClickLoggin"
-        android:text="Войти" />
+        android:text="Войти"
+        android:textColor="#E4D4D4"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/buttonLoginBack"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/ic_arrow_back_black_35dp" />
+        android:background="@drawable/ic_arrow_back_black_35dp"
+        android:textColor="#00D1C8C8" />
 
 </RelativeLayout>
