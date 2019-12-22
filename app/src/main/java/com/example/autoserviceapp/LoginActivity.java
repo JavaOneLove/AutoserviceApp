@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textPassword = findViewById(R.id.editPasswordLog);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.15:8080/")
+                .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

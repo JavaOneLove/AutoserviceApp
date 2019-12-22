@@ -30,7 +30,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         PasswordText = findViewById(R.id.editPasswordRegistration);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.15:8080/")
+                .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
