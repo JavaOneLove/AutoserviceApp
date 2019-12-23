@@ -58,9 +58,9 @@ public class UserListFragment extends ListFragment {
         users.add(userTest2);
         users.add(userTest3);
        // getUserList();
-        UserListAdapter adapter = new UserListAdapter(getContext(),
+        UserListAdapter adapter = new UserListAdapter(getActivity(),
                 R.layout.user_list_item, users);
-        ListView usersList = view.findViewById(R.id.user_list);
+        ListView usersList = view.findViewById(android.R.id.list);
         usersList.setAdapter(adapter);
 
     return view;
