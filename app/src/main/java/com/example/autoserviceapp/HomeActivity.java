@@ -1,18 +1,22 @@
 package com.example.autoserviceapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public int role = 2; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
+    public int role = 0; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,11 @@ public class HomeActivity extends AppCompatActivity {
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_manager);
                 break;
         }
+
+        HomeFragment fragment = new HomeFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -71,6 +80,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.main);
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

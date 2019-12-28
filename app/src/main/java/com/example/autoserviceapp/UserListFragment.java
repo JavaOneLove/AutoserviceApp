@@ -47,17 +47,17 @@ public class UserListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_list, container, false);
-        //Retrofit retrofit = new Retrofit.Builder()
-        //        .baseUrl("http://192.168.0.13:8080/")
-         //       .addConverterFactory(GsonConverterFactory.create())
-         //      .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.0.13:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+               .build();
 
-       // jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        users.add(userTest);
-        users.add(userTest1);
-        users.add(userTest2);
-        users.add(userTest3);
-       // getUserList();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        //users.add(userTest);
+       // users.add(userTest1);
+       // users.add(userTest2);
+        //users.add(userTest3);
+        getUserList();
         UserListAdapter adapter = new UserListAdapter(getActivity(),
                 R.layout.user_list_item, users);
         ListView usersList = view.findViewById(android.R.id.list);
