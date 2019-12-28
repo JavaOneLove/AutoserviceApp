@@ -40,9 +40,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void Loggin(){
+    public void Login(){
         User user = new User();
-        Call<User> call = jsonPlaceHolderApi.Loggin(user);
+        Call<User> call = jsonPlaceHolderApi.Login(user);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -74,7 +74,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent RegistrationActivity = new Intent(LoginActivity.this,RegistrationActivity.class);
         startActivity(RegistrationActivity);
     }
-    public void OnClickLoggin(View v){
-        Loggin();
+    public void OnClickLogin(View v){
+        Login();
+    }
+    public void OnClickReturnToHome(View view){
+        Intent intentGoHome = new Intent(this,HomeActivity.class);
+        startActivity(intentGoHome);
     }
 }

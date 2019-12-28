@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 public interface JsonPlaceHolderApi {
     @POST("home/login")
-    Call<User> Loggin(@Body User user);
+    Call<User> Login(@Body User user);
 
 
     @Headers("Content-Type: application/json")
