@@ -1,19 +1,18 @@
 package com.example.autoserviceapp;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
+
 import androidx.fragment.app.ListFragment;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 import com.example.autoserviceapp.adapter.UserListAdapter;
 import com.example.autoserviceapp.model.User;
 
@@ -33,13 +32,6 @@ public class UserListFragment extends ListFragment {
 
     }
 
-    private User userTest = new User("Username","UserEmail","UserPass");
-    private User userTest1 = new User("Username","UserEmail","UserPass");
-    private User userTest2 = new User("Username","UserEmail","UserPass");
-    private User userTest3 = new User("Username","UserEmail","UserPass");
-    final String[] catNames = new String[]{"Рыжик", "Барсик", "Мурзик",
-            "Мурка", "Васька", "Томасина", "Кристина", "Пушок", "Дымка",
-            "Кузя", "Китти", "Масяня", "Симба"};
     private List<User> users = new ArrayList<>();
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -53,10 +45,6 @@ public class UserListFragment extends ListFragment {
                .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        //users.add(userTest);
-       // users.add(userTest1);
-       // users.add(userTest2);
-        //users.add(userTest3);
         getUserList();
         UserListAdapter adapter = new UserListAdapter(getActivity(),
                 R.layout.user_list_item, users);

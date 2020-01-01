@@ -10,16 +10,21 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+
+import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 
 import java.util.Calendar;
 
 
 
 public class OrderDetailsFragment extends Fragment {
-    TextView currentDateTime;
-    Calendar dateAndTime=Calendar.getInstance();
+    private TextView currentDateTime;
+    private Calendar dateAndTime = Calendar.getInstance();
+    private FragmentDataListener fragmentDataListener;
+    private Button buttonDate;
 
 
     @Override
@@ -28,6 +33,13 @@ public class OrderDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_order_details, container, false);
         currentDateTime = view.findViewById(R.id.currentDateTime);
         setInitialDateTime();
+        buttonDate = view.findViewById(R.id.button3);
+        buttonDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate(v);
+            }
+        });
         return view;
     }
 
@@ -55,5 +67,4 @@ public class OrderDetailsFragment extends Fragment {
             setInitialDateTime();
         }
     };
-
 }

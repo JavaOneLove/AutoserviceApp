@@ -2,18 +2,18 @@ package com.example.autoserviceapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity implements FragmentDataListener {
 
-    public int role = 0; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
+    public int role = 2; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,4 +87,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
             fragmentTransaction.replace(R.id.frame_layout,fragment);
             fragmentTransaction.commit();
     }
+
+
 }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="84dp" />
+        android:layout_marginTop="70dp" />
 
     <Button
         android:id="@+id/button"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="124dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="147dp"
+        android:layout_marginTop="170dp"
         android:text="Коммент" />
 
     <TextView
@@ -35,4 +35,17 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="117dp"
         android:text="Дата" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginTop="103dp"
+        android:onClick="setDate"
+        android:text="Button" />
 </RelativeLayout>

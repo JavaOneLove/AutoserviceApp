@@ -1,8 +1,7 @@
-package com.example.autoserviceapp;
+package com.example.autoserviceapp.retrofitInterfaceAPI;
 
 import com.example.autoserviceapp.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,6 +19,7 @@ public interface JsonPlaceHolderApi {
     @POST("registration")
     Call<User> Registration(@Body User user);
 
+    @Headers("Content-Type: application/json")
     @GET("home/userList")
     Call<List<User>> getUsersList();
 }

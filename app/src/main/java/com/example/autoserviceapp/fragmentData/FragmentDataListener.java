@@ -1,4 +1,4 @@
-package com.example.autoserviceapp;
+package com.example.autoserviceapp.fragmentData;
 
 public interface FragmentDataListener {
    void openOrderDetailsFragment();
