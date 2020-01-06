@@ -1,12 +1,12 @@
 package com.example.autoserviceapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,30 +49,43 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                     ProfileFragment fragment = new ProfileFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, fragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
                 if (id == R.id.contacts) {
                     ContactsFragment fragment = new ContactsFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, fragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
                 if (id == R.id.home) {
                     HomeFragment fragment = new HomeFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout, fragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
                 if (id == R.id.auth) {
                     Intent LoginIntent = new Intent(HomeActivity.this, LoginActivity.class);
                     startActivity(LoginIntent);
                 }
-                if (id == R.id.user_list){
-                    UserListFragment fragment = new UserListFragment();
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.frame_layout,fragment);
-                    fragmentTransaction.commit();
-                }
+                if (id == R.id.user_list) {
+                     UserListFragment fragment = (UserListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_user_list);
+                    if (fragment == null) {
+                        fragment = new UserListFragment();
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout, fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                        } else
+                            {
+                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.frame_layout, fragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                            }
+                                        }
                 return true;
             }
         });
@@ -85,7 +98,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
             OrderDetailsFragment fragment = new OrderDetailsFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout,fragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+    }
+
+    @Override
+    public void openUserDetailsFragment() {
+        UserDetailsFragment fragment = new UserDetailsFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 

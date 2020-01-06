@@ -5,13 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
 import com.example.autoserviceapp.R;
+import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 import com.example.autoserviceapp.model.User;
+
 import java.util.List;
 
 public class UserListAdapter extends ArrayAdapter<User> {
 
+    private FragmentDataListener fragmentDataListener;
     private LayoutInflater inflater;
     private int layout;
     private List<User> userList;
@@ -22,7 +29,7 @@ public class UserListAdapter extends ArrayAdapter<User> {
         this.layout = resource;
         this.userList = users;
     }
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         final ViewHolder viewHolder;
 
@@ -36,7 +43,14 @@ public class UserListAdapter extends ArrayAdapter<User> {
         }
         final User user = userList.get(position);
 
-        viewHolder.nameView.setText(user.getEmail());
+        viewHolder.nameView.setText(user.getUsername());
+        viewHolder.IdView.setText(Integer.toString(user.getId()));
+        viewHolder.buttonDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentDataListener.openUserDetailsFragment();
+            }
+        });
 
         return convertView;
     }
@@ -45,9 +59,13 @@ public class UserListAdapter extends ArrayAdapter<User> {
     }
 
     private class ViewHolder {
-        final TextView nameView;
+         TextView nameView;
+         TextView IdView;
+         Button buttonDetails;
         ViewHolder(View view){
             nameView = view.findViewById(R.id.nameView);
+            IdView = view.findViewById(R.id.IdView);
+            buttonDetails = view.findViewById(R.id.buttonDetails);
         }
     }
 }

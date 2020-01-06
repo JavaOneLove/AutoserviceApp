@@ -1,9 +1,6 @@
 package com.example.autoserviceapp;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.ListFragment;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.fragment.app.ListFragment;
 
-import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 import com.example.autoserviceapp.adapter.UserListAdapter;
 import com.example.autoserviceapp.model.User;
+import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,8 @@ public class UserListFragment extends ListFragment {
 
     private List<User> users = new ArrayList<>();
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    ListView usersList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,19 +42,17 @@ public class UserListFragment extends ListFragment {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
-               .build();
+                .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         getUserList();
-        UserListAdapter adapter = new UserListAdapter(getActivity(),
-                R.layout.user_list_item, users);
-        ListView usersList = view.findViewById(android.R.id.list);
-        usersList.setAdapter(adapter);
-
-    return view;
+       // UserListAdapter adapter = new UserListAdapter(getActivity(),
+        //      R.layout.user_list_item, users);
+        usersList = view.findViewById(android.R.id.list);
+        return view;
     }
 
-    public void getUserList(){
+    private void getUserList(){
         Call<List<User>> call = jsonPlaceHolderApi.getUsersList();
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -65,7 +63,12 @@ public class UserListFragment extends ListFragment {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                     users = response.body();
+                else {
+                    users.addAll(response.body());
+                    UserListAdapter adapter = new UserListAdapter(getActivity(),
+                            R.layout.user_list_item, users);
+                    usersList.setAdapter(adapter);
+                }
             }
 
             @Override

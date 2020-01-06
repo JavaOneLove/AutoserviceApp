@@ -3,6 +3,8 @@ package com.example.autoserviceapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
     private int id;
     @SerializedName("username")
@@ -12,13 +14,30 @@ public class User {
     @SerializedName("password")
     private String Password;
 
+    private List<Role> roles;
+
     public User(String username, String email, String password) {
         this.Username = username;
         this.Email = email;
         this.Password = password;
     }
 
+    public User(int id, String username, String email, String password) {
+        this.id = id;
+        Username = username;
+        Email = email;
+        Password = password;
+    }
+
     public User() {
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
     
     public String getEmail() {
