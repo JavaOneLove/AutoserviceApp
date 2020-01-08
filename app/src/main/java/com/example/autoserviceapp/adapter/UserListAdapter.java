@@ -11,14 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.autoserviceapp.R;
-import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 import com.example.autoserviceapp.model.User;
 
 import java.util.List;
 
 public class UserListAdapter extends ArrayAdapter<User> {
 
-    private FragmentDataListener fragmentDataListener;
     private LayoutInflater inflater;
     private int layout;
     private List<User> userList;
@@ -45,12 +43,6 @@ public class UserListAdapter extends ArrayAdapter<User> {
 
         viewHolder.nameView.setText(user.getUsername());
         viewHolder.IdView.setText(Integer.toString(user.getId()));
-        viewHolder.buttonDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentDataListener.openUserDetailsFragment();
-            }
-        });
 
         return convertView;
     }
@@ -65,7 +57,6 @@ public class UserListAdapter extends ArrayAdapter<User> {
         ViewHolder(View view){
             nameView = view.findViewById(R.id.nameView);
             IdView = view.findViewById(R.id.IdView);
-            buttonDetails = view.findViewById(R.id.buttonDetails);
         }
     }
 }

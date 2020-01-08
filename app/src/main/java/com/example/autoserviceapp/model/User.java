@@ -14,7 +14,7 @@ public class User {
     @SerializedName("password")
     private String Password;
 
-    private List<Role> roles;
+    private List<String> roles;
 
     public User(String username, String email, String password) {
         this.Username = username;
@@ -32,11 +32,11 @@ public class User {
     public User() {
     }
 
-    public List<Role> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
     

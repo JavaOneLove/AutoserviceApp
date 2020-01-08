@@ -1,6 +1,7 @@
 package com.example.autoserviceapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
-import com.example.autoserviceapp.model.User;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView RedirectToRegistration;
     TextView textEmail;
     TextView textPassword;
+    SharedPreferences sPref;
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -38,30 +40,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
     }
 
     public void Login(){
-        User user = new User();
-        Call<User> call = jsonPlaceHolderApi.Login(user);
-
-        call.enqueue(new Callback<User>() {
+        Call<Integer> call = jsonPlaceHolderApi.Login(textEmail.getText().toString(),textPassword.getText().toString());
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
 
                 if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Code: " + response.code(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    return;
                 }
-                User postResponse = response.body();
-
+                sPref = getSharedPreferences("User", MODE_PRIVATE);
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putInt("id", response.body());
+                ed.commit();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         t.getMessage(), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);

@@ -1,6 +1,7 @@
 package com.example.autoserviceapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class UserListFragment extends ListFragment {
 
     private List<User> users = new ArrayList<>();
     private JsonPlaceHolderApi jsonPlaceHolderApi;
-    ListView usersList;
+    private ListView usersList;
 
 
     @Override
@@ -46,8 +47,6 @@ public class UserListFragment extends ListFragment {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         getUserList();
-       // UserListAdapter adapter = new UserListAdapter(getActivity(),
-        //      R.layout.user_list_item, users);
         usersList = view.findViewById(android.R.id.list);
         return view;
     }
@@ -65,6 +64,9 @@ public class UserListFragment extends ListFragment {
                 }
                 else {
                     users.addAll(response.body());
+                    for (User user: users) {
+                        Log.i("myLogs",user.getUsername() + user.getRoles().toString());
+                    }
                     UserListAdapter adapter = new UserListAdapter(getActivity(),
                             R.layout.user_list_item, users);
                     usersList.setAdapter(adapter);

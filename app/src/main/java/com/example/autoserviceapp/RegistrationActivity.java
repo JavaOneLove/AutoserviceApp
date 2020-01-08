@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 import com.example.autoserviceapp.model.User;
+import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +37,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
     }
 

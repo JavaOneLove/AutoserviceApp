@@ -3,29 +3,24 @@ package com.example.autoserviceapp;
 
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- *
- */
+import com.example.autoserviceapp.fragmentData.FragmentDataListener;
+
+
 public class OrderFragment extends Fragment {
 
-
-    public OrderFragment() {
-        // Required empty public constructor
-    }
-
+    private FragmentDataListener fragmentDataListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        View view = inflater.inflate(R.layout.fragment_order, container, false);
+        return view;
     }
-
 }

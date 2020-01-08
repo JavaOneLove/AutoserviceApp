@@ -1,36 +1,55 @@
 package com.example.autoserviceapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
+import com.example.autoserviceapp.model.User;
+import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity implements FragmentDataListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-    public int role = 2; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
+public class HomeActivity extends AppCompatActivity implements FragmentDataListener {
+    JsonPlaceHolderApi jsonPlaceHolderApi;
+    SharedPreferences sPref;
+    public String role = "NO_AUTH"; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sPref = getSharedPreferences("User", MODE_PRIVATE);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.0.13:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        getUserDetails();
         BottomNavigationView bottomNavigationView = findViewById(R.id.btm_nav);
         switch (role){
-            case (0):
+            case ("NO_AUTH"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_no_auth);
                 break;
-            case(1):
+            case("USER"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_auth);
                 break;
-            case(2):
+            case("ADMIN"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_admin);
                 break;
-            case (3):
+            case ("MANAGER"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_manager);
                 break;
         }
@@ -95,11 +114,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
 
     @Override
     public void openOrderDetailsFragment(){
-            OrderDetailsFragment fragment = new OrderDetailsFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout,fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+        OrderDetailsFragment fragment = new OrderDetailsFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -109,6 +128,51 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void openAddVehicleFragment() {
+        AddVehicleFragment fragment = new AddVehicleFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void openProfileFragment() {
+        ProfileFragment fragment = new ProfileFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetails(sPref.getInt("id", 0));
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Code: " + response.code(), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    User user = response.body();
+                    if (user != null){
+                      role =  user.getRoles().toString();
+                    } else
+                        role = "NO_AUTH";
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        t.getMessage(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        });
     }
 
 

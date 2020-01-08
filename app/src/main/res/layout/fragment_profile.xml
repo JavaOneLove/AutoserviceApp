@@ -20,7 +20,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editTextUsername"
         android:layout_width="256dp"
         android:layout_height="30dp"
         android:layout_below="@+id/textView3"
@@ -31,12 +31,12 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4" />
+        android:layout_toEndOf="@+id/textUsername"
+        android:layout_toRightOf="@+id/textUsername" />
 
     <EditText
-        android:id="@+id/editTextPhone"
-        android:inputType="phone"
+        android:id="@+id/editTextPassword"
+        android:inputType="textEmailAddress"
         android:layout_width="256dp"
         android:layout_height="30dp"
         android:layout_below="@+id/editTextEmail"
@@ -47,15 +47,14 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textView7"
-        android:layout_toRightOf="@+id/textView7" />
+        android:layout_toEndOf="@+id/textPassword"
+        android:layout_toRightOf="@+id/textPassword" />
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:inputType="textEmailAddress"
         android:layout_width="256dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/editTextSurname"
+        android:layout_below="@+id/editTextUsername"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="15dp"
@@ -63,26 +62,11 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textView6"
-        android:layout_toRightOf="@+id/textView6" />
-
-    <EditText
-        android:id="@+id/editTextSurname"
-        android:layout_width="256dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/editTextName"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textView5"
-        android:layout_toRightOf="@+id/textView5" />
+        android:layout_toEndOf="@+id/textEmail"
+        android:layout_toRightOf="@+id/textEmail" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textUsername"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
@@ -91,7 +75,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="35dp"
-        android:text="Имя:"
+        android:text="Username:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
@@ -107,23 +91,10 @@
         android:background="@android:drawable/ic_menu_set_as" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textEmail"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="Фамилия:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/textUsername"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="20dp"
@@ -133,27 +104,58 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textPassword"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/textEmail"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="35dp"
-        android:text="Телефон:"
+        android:text="Password:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonUserUpdate"
         android:layout_width="139dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextPhone"
+        android:layout_below="@+id/editTextPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="260dp"
         android:layout_marginLeft="260dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:text="Изменить" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="346dp" />
+
+    <Button
+        android:id="@+id/buttonUpdateVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:text="Изменить" />
+
+    <Button
+        android:id="@+id/buttonAddVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_toStartOf="@+id/buttonUpdateVehicle"
+        android:layout_toLeftOf="@+id/buttonUpdateVehicle"
+        android:text="Добавить" />
 </RelativeLayout>
