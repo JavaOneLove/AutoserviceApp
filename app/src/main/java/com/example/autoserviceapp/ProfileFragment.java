@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.autoserviceapp.adapter.VehicleListAdapter;
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.model.Vehicle;
@@ -35,13 +36,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
-
     private FragmentDataListener fragmentDataListener;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private EditText editUsername;
     private EditText editEmail;
     private EditText editPassword;
     private Spinner spinner;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +80,20 @@ public class ProfileFragment extends Fragment {
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        getVehicleList(); // Adapter dlya mashinok!!!!
+        getUserDetails();
+        getVehicleList();
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Vehicle item = (Vehicle) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+        spinner.setOnItemSelectedListener(itemSelectedListener);
         return v;
     }
 
@@ -97,11 +111,7 @@ public class ProfileFragment extends Fragment {
                     return;
                 }
                 vehicleList.addAll(response.body());
-                for (Vehicle vehicle: vehicleList) {
-                    Log.i("MyLog",Integer.toString(vehicle.getId()));
-                }
-
-                ArrayAdapter<Vehicle> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, vehicleList);
+                VehicleListAdapter adapter = new VehicleListAdapter(getActivity(),R.layout.vehicle_list_item,vehicleList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
             }
@@ -132,6 +142,34 @@ public class ProfileFragment extends Fragment {
                     toast.show();
                     return;
                 }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast toast = Toast.makeText(getContext(),
+                        t.getMessage(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                Log.i("InfoLog",t.getMessage());
+            }
+        });
+    }
+
+    private void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetails(6);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    Toast toast = Toast.makeText(getContext(),
+                            "Code: " + response.code(), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+               User user = response.body();
+                editUsername.setText(user.getUsername());
+                editEmail.setText(user.getEmail());
+                editPassword.setText(user.getPassword());
             }
 
             @Override

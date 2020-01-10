@@ -32,11 +32,11 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/textUsername"
-        android:layout_toRightOf="@+id/textUsername" />
+        android:layout_toRightOf="@+id/textUsername"
+        android:background="@drawable/fileds" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:inputType="textEmailAddress"
         android:layout_width="256dp"
         android:layout_height="30dp"
         android:layout_below="@+id/editTextEmail"
@@ -48,7 +48,9 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/textPassword"
-        android:layout_toRightOf="@+id/textPassword" />
+        android:layout_toRightOf="@+id/textPassword"
+        android:background="@drawable/fileds"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -63,7 +65,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/textEmail"
-        android:layout_toRightOf="@+id/textEmail" />
+        android:layout_toRightOf="@+id/textEmail"
+        android:background="@drawable/fileds" />
 
     <TextView
         android:id="@+id/textUsername"
@@ -126,6 +129,7 @@
         android:layout_marginStart="260dp"
         android:layout_marginLeft="260dp"
         android:layout_marginTop="35dp"
+        android:background="@drawable/button"
         android:text="Изменить" />
 
     <Spinner
@@ -145,6 +149,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
+        android:background="@drawable/button"
         android:text="Изменить" />
 
     <Button
@@ -157,5 +162,6 @@
         android:layout_marginRight="25dp"
         android:layout_toStartOf="@+id/buttonUpdateVehicle"
         android:layout_toLeftOf="@+id/buttonUpdateVehicle"
+        android:background="@drawable/button"
         android:text="Добавить" />
 </RelativeLayout>

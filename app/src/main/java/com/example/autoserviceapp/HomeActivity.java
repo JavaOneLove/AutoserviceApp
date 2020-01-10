@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeActivity extends AppCompatActivity implements FragmentDataListener {
     JsonPlaceHolderApi jsonPlaceHolderApi;
     SharedPreferences sPref;
-    public String role = "NO_AUTH"; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
+    public String role = "USER"; // 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        getUserDetails();
+        //getUserDetails();
         BottomNavigationView bottomNavigationView = findViewById(R.id.btm_nav);
         switch (role){
             case ("NO_AUTH"):

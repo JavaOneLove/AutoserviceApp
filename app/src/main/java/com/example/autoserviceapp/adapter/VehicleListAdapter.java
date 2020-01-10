@@ -10,38 +10,37 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.autoserviceapp.R;
-import com.example.autoserviceapp.model.User;
+import com.example.autoserviceapp.model.Vehicle;
 
 import java.util.List;
 
-public class UserListAdapter extends ArrayAdapter<User> {
-
+public class VehicleListAdapter extends ArrayAdapter<Vehicle> {
     private LayoutInflater inflater;
     private int layout;
-    private List<User> userList;
+    private List<Vehicle> vehicleList;
 
-    public UserListAdapter(Context context, int resource, List<User> users) {
-        super(context, resource, users);
+    public VehicleListAdapter(Context context, int resource, List<Vehicle> vehicles) {
+        super(context, resource, vehicles);
         this.inflater = LayoutInflater.from(context);
         this.layout = resource;
-        this.userList = users;
+        this.vehicleList = vehicles;
     }
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
-        final ViewHolder viewHolder;
+        final VehicleListAdapter.ViewHolder viewHolder;
 
         if(convertView==null){
             convertView = inflater.inflate(this.layout, parent, false);
-            viewHolder = new ViewHolder(convertView);
+            viewHolder = new VehicleListAdapter.ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
         else{
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (VehicleListAdapter.ViewHolder) convertView.getTag();
         }
-        final User user = userList.get(position);
+        final Vehicle vehicle = vehicleList.get(position);
 
-        viewHolder.nameView.setText(user.getUsername());
-        viewHolder.IdView.setText(Integer.toString(user.getId()));
+        viewHolder.nameMark.setText(vehicle.getMark());
+        viewHolder.nameModel.setText(vehicle.getModel());
 
         return convertView;
     }
@@ -50,11 +49,11 @@ public class UserListAdapter extends ArrayAdapter<User> {
     }
 
     private class ViewHolder {
-         TextView nameView;
-         TextView IdView;
+        TextView nameMark;
+        TextView nameModel;
         ViewHolder(View view){
-            nameView = view.findViewById(R.id.nameView);
-            IdView = view.findViewById(R.id.IdView);
+            nameMark = view.findViewById(R.id.text1);
+            nameModel = view.findViewById(R.id.text2);
         }
     }
 }
