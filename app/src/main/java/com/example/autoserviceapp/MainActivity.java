@@ -2,8 +2,11 @@ package com.example.autoserviceapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -12,11 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, HomeActivity.class);
-       // try {
-           // TimeUnit.SECONDS.sleep(2);
-      // } catch (InterruptedException e) {
-        //    e.printStackTrace();
-       // }
+        SystemClock.sleep(TimeUnit.SECONDS.toMillis(2));
         startActivity(intent);
         finish();
     }

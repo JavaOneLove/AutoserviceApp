@@ -71,6 +71,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
+                if (id == R.id.order) {
+                    OrderFragment fragment = new OrderFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
                 if (id == R.id.contacts) {
                     ContactsFragment fragment = new ContactsFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

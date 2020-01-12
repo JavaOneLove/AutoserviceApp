@@ -37,6 +37,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onInsert(String Username,String Email,String Password){
         cv = new ContentValues();
         db = getWritableDatabase();
+        cv.put("id",1);
         cv.put("Username",Username);
         cv.put("Email",Email);
         cv.put("Password",Password);

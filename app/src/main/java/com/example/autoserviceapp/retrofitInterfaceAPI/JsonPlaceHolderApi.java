@@ -55,4 +55,12 @@ public interface JsonPlaceHolderApi {
     @POST("home/createVehicle")
     Call<Vehicle> createVehicle(@Body Vehicle vehicle);
 
+    @Headers("Content-Type: application/json")
+    @GET("home/orderList")
+    Call<List<Order>> getOrderList();
+
+    @Headers("Content-Type: application/json")
+    @POST("home/orderListUser")
+    Call<List<Order>> getOrderListUser(@Query("id") int id);
+
 }
