@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddVehicleFragment">
+    tools:context=".AddVehicleFragment"
+    android:background="@color/colorPrimaryDark">
 
     <EditText
         android:id="@+id/editMark"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -16,16 +17,17 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:background="@drawable/fileds"
-        android:hint="Марка" />
+        android:hint="Марка"
+        android:padding="15sp" />
 
     <EditText
         android:id="@+id/editModel"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/editMark"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -37,12 +39,13 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:background="@drawable/fileds"
-        android:hint="Модель" />
+        android:hint="Модель"
+        android:padding="15sp" />
 
     <EditText
         android:id="@+id/editColor"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/editModel"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -54,12 +57,13 @@
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
         android:background="@drawable/fileds"
-        android:hint="Цвет" />
+        android:hint="Цвет"
+        android:padding="15sp" />
 
     <EditText
         android:id="@+id/editDate"
         android:layout_width="240dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/editColor"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -67,23 +71,26 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/fileds"
-        android:hint="Дата выпуска" />
+        android:hint="Дата выпуска"
+        android:padding="15sp" />
 
     <Button
         android:id="@+id/buttonDateChange"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/editColor"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="31dp"
         android:layout_toEndOf="@+id/editDate"
         android:layout_toRightOf="@+id/editDate"
-        android:text="Изменить" />
+        android:background="@drawable/button"
+        android:text="Изменить"
+        android:textColor="#CCC9C9" />
 
     <TextView
         android:id="@+id/textView4"
@@ -96,7 +103,9 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="30dp"
         android:text="Добавить автомобиль"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#CECACA"
+        android:textSize="26sp"/>
 
     <Button
         android:id="@+id/buttonAddVehicle"
@@ -112,7 +121,10 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:text="Добавить" />
+        android:background="@drawable/button"
+        android:text="Добавить"
+        android:textColor="#CECACA"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/buttonReturnToProfile"

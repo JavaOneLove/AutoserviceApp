@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactsFragment">
+    tools:context=".ContactsFragment"
+    android:background="@color/colorPrimaryDark">
 
 
     <ImageView
@@ -29,8 +30,10 @@
         android:layout_marginStart="132dp"
         android:layout_marginLeft="132dp"
         android:layout_marginTop="16dp"
-        android:text="Название организации"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Автомастерская Крот"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#A71B1B"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -42,7 +45,9 @@
         android:layout_marginStart="133dp"
         android:layout_marginLeft="133dp"
         android:layout_marginTop="28dp"
-        android:text="Полное название" />
+        android:text="ИП Иванов И.И."
+        android:textColor="#CEAC3F"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textPhone"
@@ -55,12 +60,13 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:drawableRight="@drawable/ic_call"
         android:onClick="onClick"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#C5C1C1" />
 
     <TextView
         android:id="@+id/textAddress"
@@ -73,11 +79,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:drawableRight="@drawable/ic_location"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#C5C1C1" />
 
     <TextView
         android:id="@+id/textMail"
@@ -90,14 +97,15 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:clickable="true"
         android:drawableRight="@drawable/ic_email"
         android:linksClickable="true"
         android:onClick="onClickEmail"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#CAC4C4" />
 
     <TextView
         android:id="@+id/textWebSite"
@@ -110,11 +118,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:clickable="true"
         android:drawableRight="@drawable/ic_web"
         android:onClick="onClickWebSite"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#BEBBBB" />
 </RelativeLayout>

@@ -3,83 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="289dp"
+        android:layout_height="52dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="21dp"
         android:layout_weight="1"
         android:text="Личный кабинет"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#BEBCBC"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="256dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textUsername"
-        android:layout_toRightOf="@+id/textUsername"
-        android:background="@drawable/fileds" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="256dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/editTextEmail"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textPassword"
-        android:layout_toRightOf="@+id/textPassword"
-        android:background="@drawable/fileds"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="256dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/editTextUsername"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_toEndOf="@+id/textEmail"
-        android:layout_toRightOf="@+id/textEmail"
-        android:background="@drawable/fileds" />
-
-    <TextView
-        android:id="@+id/textUsername"
-        android:layout_width="110dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="146dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:background="@drawable/fileds"
+        android:hint="Имя"
+        android:padding="15sp" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="146dp"
         android:layout_marginTop="35dp"
-        android:text="Username:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:background="@drawable/fileds"
+        android:hint="Пароль"
+        android:inputType="textEmailAddress"
+        android:padding="15sp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextUsername"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:background="@drawable/fileds"
+        android:hint="Email"
+        android:padding="15sp" />
 
     <Button
         android:id="@+id/buttonLogOut"
@@ -93,32 +89,6 @@
         android:layout_marginRight="10dp"
         android:background="@android:drawable/ic_menu_set_as" />
 
-    <TextView
-        android:id="@+id/textEmail"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textUsername"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="Email:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/textPassword"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textEmail"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="Password:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
     <Button
         android:id="@+id/buttonUserUpdate"
         android:layout_width="139dp"
@@ -126,18 +96,19 @@
         android:layout_below="@+id/editTextPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="200dp"
         android:layout_marginLeft="260dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/button"
-        android:text="Изменить" />
+        android:text="Изменить"
+        android:textColor="#C4BDBD" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="346dp" />
+        android:layout_marginTop="417dp" />
 
     <Button
         android:id="@+id/buttonUpdateVehicle"
@@ -146,22 +117,24 @@
         android:layout_below="@+id/spinner"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="58dp"
         android:background="@drawable/button"
-        android:text="Изменить" />
+        android:text="Изменить"
+        android:textColor="#BEB9B9" />
 
     <Button
         android:id="@+id/buttonAddVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="37dp"
         android:layout_toStartOf="@+id/buttonUpdateVehicle"
         android:layout_toLeftOf="@+id/buttonUpdateVehicle"
         android:background="@drawable/button"
-        android:text="Добавить" />
+        android:text="Добавить"
+        android:textColor="#BBB6B6" />
 </RelativeLayout>
