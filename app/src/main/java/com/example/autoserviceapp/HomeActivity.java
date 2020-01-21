@@ -130,9 +130,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
     }
 
     @Override
-    public void openOrderDetailsFragment(){
+    public void openOrderDetailsFragment(String text){
         OrderDetailsFragment fragment = new OrderDetailsFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString(fragment.KEY,text);
+        fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

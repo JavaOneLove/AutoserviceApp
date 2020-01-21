@@ -116,8 +116,9 @@ public class AddVehicleFragment extends Fragment {
                             "Code: " + response.code(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                  user = response.body();
                 }
+                user = response.body();
+                Log.i("MyLOG -----",user.getUsername());
             }
 
             @Override

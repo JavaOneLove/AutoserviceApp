@@ -7,10 +7,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.autoserviceapp.adapter.OrderListAdapter;
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
 import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.Order;
@@ -30,23 +32,20 @@ public class OrderFragment extends Fragment {
 
     private FragmentDataListener fragmentDataListener;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private ListView ordersList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
         SQLiteHelper sqLiteHelper = new SQLiteHelper(getContext());
-        //sqLiteHelper.onInsert("name","email","pass");
-        Log.i("-------Log------",Integer.toString(sqLiteHelper.onRead()));
-        //sqLiteHelper.onDelete();
-       // Log.i("-------Log------",Integer.toString(sqLiteHelper.onRead()));
-
+        ordersList = view.findViewById(android.R.id.list);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
+        getOrderList();
         return view;
     }
 
@@ -63,6 +62,9 @@ public class OrderFragment extends Fragment {
                 }
                 List<Order> orders = new ArrayList<>();
                 orders.addAll(response.body());
+                OrderListAdapter adapter = new OrderListAdapter(getActivity(),
+                        R.layout.order_list_item, orders);
+                ordersList.setAdapter(adapter);
             }
 
             @Override

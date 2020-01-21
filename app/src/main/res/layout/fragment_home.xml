@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/buttonRepairEngine"
-        android:layout_width="wrap_content"
-        android:layout_height="102dp"
+        android:layout_width="140dp"
+        android:layout_height="110dp"
         android:layout_below="@+id/textView6"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -18,29 +18,25 @@
         android:layout_marginLeft="43dp"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:background="@drawable/tachka" />
-
-    <Button
-        android:id="@+id/buttonPainting"
-        android:layout_width="wrap_content"
-        android:layout_height="107dp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="29dp"
-        android:layout_toEndOf="@+id/buttonRepairEngine"
-        android:layout_toRightOf="@+id/buttonRepairEngine"
-        android:layout_weight="1"
         android:background="@drawable/dvig" />
 
     <Button
-        android:id="@+id/buttonShinomontazh"
-        android:layout_width="127dp"
-        android:layout_height="112dp"
+        android:id="@+id/buttonPainting"
+        android:layout_width="140dp"
+        android:layout_height="110dp"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="29dp"
+        android:layout_weight="1"
+        android:background="@drawable/kraska" />
+
+    <Button
+        android:id="@+id/buttonTireService"
+        android:layout_width="140dp"
+        android:layout_height="110dp"
         android:layout_below="@+id/buttonRepairEngine"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -48,37 +44,33 @@
         android:layout_marginLeft="37dp"
         android:layout_marginTop="60dp"
         android:layout_weight="1"
-        android:background="@drawable/kraska" />
-
-    <Button
-        android:id="@+id/buttonETC"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonPainting"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="51dp"
-        android:layout_toEndOf="@+id/buttonShinomontazh"
-        android:layout_toRightOf="@+id/buttonShinomontazh"
-        android:layout_weight="1"
         android:background="@drawable/shinomontaj" />
 
     <Button
-        android:id="@+id/buttonRepairBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonETC"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
+        android:id="@+id/buttonETC"
+        android:layout_width="140dp"
+        android:layout_height="110dp"
+        android:layout_below="@+id/buttonRepairBody"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="137dp"
         android:layout_weight="1"
         android:background="@drawable/to" />
+
+    <Button
+        android:id="@+id/buttonRepairBody"
+        android:layout_width="140dp"
+        android:layout_height="110dp"
+        android:layout_below="@+id/buttonPainting"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_weight="1"
+        android:background="@drawable/tachka" />
 
     <TextView
         android:id="@+id/textView6"
@@ -108,7 +100,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="12dp"
-        android:text="Кузовные работы"
+        android:text="Ремонт двигателя"
         android:textColor="#CEC9C9"
         android:textSize="18sp" />
 
@@ -117,12 +109,12 @@
         android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonPainting"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="62dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="12dp"
         android:layout_toEndOf="@+id/textView7"
         android:layout_toRightOf="@+id/textView7"
-        android:text="Ремонт двигателя"
+        android:text="Покраска"
         android:textColor="#CEC9C9"
         android:textSize="18sp" />
 
@@ -130,41 +122,45 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonShinomontazh"
+        android:layout_below="@+id/buttonTireService"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="62dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="12dp"
-        android:text="Покраска"
+        android:text="Шиномонтаж"
         android:textColor="#CEC9C9"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonETC"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="158dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="12dp"
-        android:layout_toEndOf="@+id/textView12"
-        android:layout_toRightOf="@+id/textView12"
-        android:text="Шиномонтаж"
+        android:layout_marginEnd="85dp"
+        android:layout_marginRight="90dp"
+        android:text="Техническое обслуживание"
         android:textColor="#CEC9C9"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="325dp"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonRepairBody"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="87dp"
-        android:layout_marginLeft="87dp"
-        android:layout_marginTop="4dp"
-        android:text="Техническое обслуживание"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="-37dp"
+        android:layout_marginRight="-37dp"
+        android:layout_toEndOf="@+id/textView12"
+        android:layout_toRightOf="@+id/textView12"
+        android:text="Кузовные работы"
         android:textColor="#CEC9C9"
         android:textSize="18sp" />
 

@@ -1,30 +1,50 @@
 package com.example.autoserviceapp.model;
 
-import java.util.Date;
-
 public class Order {
     private int id;
-    private Date date;
+    private String date;
+    private String work;
     private String status;
+    private String comment;
     private User primaryUser;
     private Vehicle primaryVehicle;
 
     public Order() {
     }
 
-    public Order(Date date, String status, User primaryUser, Vehicle primaryVehicle) {
+    public Order(String date, String work, String status, String comment, User primaryUser, Vehicle primaryVehicle) {
         this.date = date;
+        this.work = work;
         this.status = status;
+        this.comment = comment;
         this.primaryUser = primaryUser;
         this.primaryVehicle = primaryVehicle;
     }
 
-    public Order(int id, Date date, String status, User primaryUser, Vehicle primaryVehicle) {
+    public Order(int id, String date, String work, String status, String comment, User primaryUser, Vehicle primaryVehicle) {
         this.id = id;
         this.date = date;
+        this.work = work;
         this.status = status;
+        this.comment = comment;
         this.primaryUser = primaryUser;
         this.primaryVehicle = primaryVehicle;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
     }
 
     public int getId() {
@@ -35,11 +55,11 @@ public class Order {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

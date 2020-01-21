@@ -39,8 +39,8 @@ public class OrderListAdapter extends ArrayAdapter<Order> {
         }
         final Order order = orderList.get(position);
 
-        viewHolder.nameMark.setText(Integer.toString(order.getId()));
-        viewHolder.nameModel.setText(order.getStatus());
+        viewHolder.nameWork.setText(order.getWork());
+        viewHolder.nameStatus.setText(order.getStatus());
 
         return convertView;
     }
@@ -49,11 +49,11 @@ public class OrderListAdapter extends ArrayAdapter<Order> {
     }
 
     private class ViewHolder {
-        TextView nameMark;
-        TextView nameModel;
+        TextView nameWork;
+        TextView nameStatus;
         ViewHolder(View view){
-            nameMark = view.findViewById(R.id.text1);
-            nameModel = view.findViewById(R.id.text2);
+            nameWork = view.findViewById(R.id.workView);
+            nameStatus = view.findViewById(R.id.statusView);
         }
     }
 }

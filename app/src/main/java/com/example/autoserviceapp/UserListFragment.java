@@ -53,6 +53,7 @@ public class UserListFragment extends ListFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     User user = (User) parent.getItemAtPosition(position);
+                    Log.i("MyLOG-----",user.getUsername());
             }
 
             @Override
@@ -76,9 +77,6 @@ public class UserListFragment extends ListFragment {
                 }
                 else {
                     users.addAll(response.body());
-                    for (User user: users) {
-                        Log.i("myLogs",user.getUsername() + user.getRole());
-                    }
                     UserListAdapter adapter = new UserListAdapter(getActivity(),
                             R.layout.user_list_item, users);
                     usersList.setAdapter(adapter);
