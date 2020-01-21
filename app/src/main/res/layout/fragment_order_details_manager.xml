@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderDetailsManagerFragment"
+    android:background="@color/colorPrimaryDark">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ic_arrow_back_black_35dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="180dp"
+        android:text="Коммент"
+        android:textColor="#CEC9C9"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/currentDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="66dp"
+        android:text="Дата"
+        android:textColor="#CEC9C9"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:layout_marginTop="35dp"
+        android:hint="Описание проблемы"
+        android:textColor="#CEC9C9"
+        android:textColorHint="#CECACA" />
+
+    <TextView
+        android:id="@+id/textHeader"
+        android:layout_width="294dp"
+        android:layout_height="52dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:textColor="#CEC9C9"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/buttonAccept"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="303dp"
+        android:background="@drawable/button"
+        android:text="Завершить"
+        android:textColor="#CEC9C9" />
+
+    <Button
+        android:id="@+id/buttonDeni"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="226dp"
+        android:layout_marginLeft="226dp"
+        android:layout_marginTop="302dp"
+        android:background="@drawable/button"
+        android:text="Отклонить"
+        android:textColor="#CEC9C9" />
+
+    <TextView
+        android:id="@+id/textVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="87dp"
+        android:text="Автомобиль"
+        android:textColor="#CEC9C9"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

@@ -2,7 +2,6 @@ package com.example.autoserviceapp;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.autoserviceapp.fragmentData.SQLiteHelper;
-import com.example.autoserviceapp.model.User;
+import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
+import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,15 +23,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class UserDetailsFragment extends Fragment {
-
+public class OrderDetailsManagerFragment extends Fragment {
+    static final String KEY = "";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private SQLiteHelper sqLiteHelper;
-    private TextView textId,textEmail,textPass,textRole,textUsername;
-    static final String KEY = "text";
-    private User user;
+    private Order order;
+    private TextView textHeader,textVehicle,textDate;
+    private TextInputEditText textComment;
 
-    public UserDetailsFragment() {
+
+    public OrderDetailsManagerFragment() {
         // Required empty public constructor
     }
 
@@ -41,35 +40,36 @@ public class UserDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user_details, container, false);
-        textId = view.findViewById(R.id.textIdUser);
-        textEmail = view.findViewById(R.id.textEmailUser);
-        textPass = view.findViewById(R.id.textPasswordUser);
-        textUsername =view.findViewById(R.id.textUsernameUser);
-        textRole = view .findViewById(R.id.textUserRole);
-        Button buttonDeleteUser = view.findViewById(R.id.buttonDeleteUser);
-        String id = getArguments().getString(KEY);
+        View view = inflater.inflate(R.layout.fragment_order_details_manager, container, false);
+        Button buttonAccept = view.findViewById(R.id.buttonAccept);
+        Button buttonDeni = view.findViewById(R.id.buttonDeni);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        getUserDetails();
-        buttonDeleteUser.setOnClickListener(new View.OnClickListener() {
+        getOrderDetails();
+        buttonAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteUser();
+                updateOrder(order);
+            }
+        });
+        buttonDeni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateOrder(order);
             }
         });
         return view;
     }
 
-    private void deleteUser(){
-        Call<User> call = jsonPlaceHolderApi.deleteUser(user);
-        call.enqueue(new Callback<User>() {
+    private void updateOrder(Order order){
+        Call<Order> call =jsonPlaceHolderApi.updateOrder(order);
+        call.enqueue(new Callback<Order>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Order> call, Response<Order> response) {
                 if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(getContext(),
                             "Code: " + response.code(), Toast.LENGTH_SHORT);
@@ -79,36 +79,32 @@ public class UserDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Order> call, Throwable t) {
                 Toast toast = Toast.makeText(getContext(),
                         t.getMessage(), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();            }
+                toast.show();
+            }
         });
     }
 
-    private void getUserDetails(){
-        Call<User> call =jsonPlaceHolderApi.getUserDetails(getArguments().getInt(KEY));
-        call.enqueue(new Callback<User>() {
+    private void getOrderDetails(){
+        Call<Order> call =jsonPlaceHolderApi.getOrderDetails(getArguments().getInt(KEY));
+        call.enqueue(new Callback<Order>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Order> call, Response<Order> response) {
                 if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(getContext(),
                             "Code: " + response.code(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                user = response.body();
-                Log.i("MyLog", user.getUsername());
-                //textId.setText(user.getId());
-               // textEmail.setText(user.getEmail());
-               // textPass.setText(user.getPassword());
-                //textUsername.setText(user.getUsername());
-               // textRole.setText(user.getRole());
+                order = response.body();
+
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Order> call, Throwable t) {
                 Toast toast = Toast.makeText(getContext(),
                         t.getMessage(), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);

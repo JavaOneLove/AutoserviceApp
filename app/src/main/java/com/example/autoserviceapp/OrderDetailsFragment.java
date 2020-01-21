@@ -171,6 +171,14 @@ public class OrderDetailsFragment extends Fragment {
                     return;
                 }
                 vehicleList.addAll(response.body());
+                List<Vehicle> userVehicles = new ArrayList<>();
+                if (!vehicleList.isEmpty()) {
+                    for (Vehicle vehicle : vehicleList) {
+                        if (vehicle.getPrimaryUser().getId() == user.getId()) {
+                            userVehicles.add(vehicle);
+                        }
+                    }
+                }
                 VehicleListAdapter adapter = new VehicleListAdapter(getActivity(),R.layout.vehicle_list_item,vehicleList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);

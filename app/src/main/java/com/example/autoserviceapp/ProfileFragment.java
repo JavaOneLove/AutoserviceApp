@@ -45,6 +45,7 @@ public class ProfileFragment extends Fragment {
     private EditText editPassword;
     private Spinner spinner;
     private SQLiteHelper sqLiteHelper;
+    private User user;
 
 
     @Override
@@ -124,7 +125,15 @@ public class ProfileFragment extends Fragment {
                     return;
                 }
                 vehicleList.addAll(response.body());
-                VehicleListAdapter adapter = new VehicleListAdapter(getActivity(),R.layout.vehicle_list_item,vehicleList);
+                List<Vehicle> userVehicles = new ArrayList<>();
+                if (!vehicleList.isEmpty()) {
+                    for (Vehicle vehicle : vehicleList) {
+                        if (vehicle.getPrimaryUser().getId() == user.getId()) {
+                            userVehicles.add(vehicle);
+                        }
+                    }
+                }
+                VehicleListAdapter adapter = new VehicleListAdapter(getActivity(),R.layout.vehicle_list_item,userVehicles);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
             }
@@ -179,7 +188,7 @@ public class ProfileFragment extends Fragment {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-               User user = response.body();
+               user = response.body();
                 editUsername.setText(user.getUsername());
                 editEmail.setText(user.getEmail());
                 editPassword.setText(user.getPassword());

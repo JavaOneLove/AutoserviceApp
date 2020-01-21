@@ -16,7 +16,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
     @Headers("Content-Type: application/x-www-form-urlencoded")
@@ -35,6 +34,10 @@ public interface JsonPlaceHolderApi {
     @Headers("Content-Type: application/json")
     @GET("home/userDetails/{id}")
     Call<User> getUserDetails(@Path("id") int id);
+
+    @Headers("Content-Type: application/json")
+    @GET("home/orderDetails/{id}")
+    Call<Order> getOrderDetails(@Path("id") int id);
 
     @Headers("Content-Type: application/json")
     @GET("home/userDetailsName/{name}")
@@ -65,7 +68,6 @@ public interface JsonPlaceHolderApi {
     Call<List<Order>> getOrderList();
 
     @Headers("Content-Type: application/json")
-    @POST("home/orderListUser")
-    Call<List<Order>> getOrderListUser(@Query("id") int id);
-
+    @POST("home/updateOrder")
+    Call<Order> updateOrder(@Body Order order);
 }
