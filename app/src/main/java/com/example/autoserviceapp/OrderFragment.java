@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
+import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 
@@ -34,9 +35,9 @@ public class OrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
-       // SQLiteHelper sqLiteHelper = new SQLiteHelper(getContext());
-        //sqLiteHelper.onInsert("anime","a","p");
-       // Log.i("-------Log------",Integer.toString(sqLiteHelper.onRead()));
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(getContext());
+        //sqLiteHelper.onInsert("name","email","pass");
+        Log.i("-------Log------",Integer.toString(sqLiteHelper.onRead()));
         //sqLiteHelper.onDelete();
        // Log.i("-------Log------",Integer.toString(sqLiteHelper.onRead()));
 

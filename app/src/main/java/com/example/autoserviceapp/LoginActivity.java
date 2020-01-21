@@ -1,17 +1,19 @@
 package com.example.autoserviceapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,16 +25,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView RedirectToRegistration;
     TextView textEmail;
     TextView textPassword;
-    SharedPreferences sPref;
+    SQLiteHelper sqLiteHelper;
+    Button buttonBackHome,buttonLogin;
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        sqLiteHelper = new SQLiteHelper(getApplicationContext());
         RedirectToRegistration = findViewById(R.id.textRedirectToRegistration);
-        textEmail = findViewById(R.id.editEmailLog);
-        textPassword = findViewById(R.id.editPasswordLog);
+        textEmail = (EditText) findViewById(R.id.editEmailLog);
+        textPassword = (EditText) findViewById(R.id.editPasswordLog);
+        buttonLogin = findViewById(R.id.buttonLogIn);
+        buttonBackHome = findViewById(R.id.buttonLoginBack);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
@@ -40,9 +46,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Login();
+            }
+        });
+        buttonBackHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backHome = new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(backHome);
+            }
+        });
+
     }
 
     public void Login(){
+        Log.i("MyLOG -------",textEmail.getText().toString());
         Call<Integer> call = jsonPlaceHolderApi.Login(textEmail.getText().toString(),textPassword.getText().toString());
         call.enqueue(new Callback<Integer>() {
             @Override
@@ -54,10 +75,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                sPref = getSharedPreferences("User", MODE_PRIVATE);
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putInt("id", response.body());
-                ed.commit();
+                if (response.code() == 200) {
+                    sqLiteHelper.onInsert(textEmail.getText().toString(),
+                            textEmail.getText().toString(),
+                            textPassword.getText().toString());
+                    Intent backHome = new Intent(LoginActivity.this,HomeActivity.class);
+                    startActivity(backHome);
+                }
             }
 
             @Override
@@ -74,12 +98,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         Intent RegistrationActivity = new Intent(LoginActivity.this,RegistrationActivity.class);
         startActivity(RegistrationActivity);
-    }
-    public void OnClickLogin(View v){
-        Login();
-    }
-    public void OnClickReturnToHome(View view){
-        Intent intentGoHome = new Intent(this,HomeActivity.class);
-        startActivity(intentGoHome);
     }
 }

@@ -2,7 +2,6 @@ package com.example.autoserviceapp;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
+import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.model.Vehicle;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
@@ -28,22 +28,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class AddVehicleFragment extends Fragment {
-    private SharedPreferences sPref;
-    User user = new User();
     private FragmentDataListener fragmentDataListener;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private User user;
     private EditText editMark;
     private EditText editModel;
     private EditText editColor;
     private EditText editDate;
+    private SQLiteHelper sqLiteHelper;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_vehicle, container, false);
-        sPref = this.getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
-        getUserDetails();
+        sqLiteHelper = new SQLiteHelper(getContext());
         editMark = view.findViewById(R.id.editMark);
         editModel = view.findViewById(R.id.editModel);
         editColor = view.findViewById(R.id.editColor);
@@ -51,6 +50,13 @@ public class AddVehicleFragment extends Fragment {
         Button buttonDateChange = view.findViewById(R.id.buttonDateChange);
         Button buttonAddVehicle = view.findViewById(R.id.buttonAddVehicle);
         Button buttonReturnToProfile = view.findViewById(R.id.buttonReturnToProfile);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.0.13:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        getUserDetails();
         buttonDateChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,12 +75,6 @@ public class AddVehicleFragment extends Fragment {
             fragmentDataListener.openProfileFragment();
             }
         });
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.13:8080/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         return view;
     }
     private void createVehicle() {
@@ -106,8 +106,8 @@ public class AddVehicleFragment extends Fragment {
             }
         });
     }
-    public void getUserDetails(){
-        Call<User> call = jsonPlaceHolderApi.getUserDetails(sPref.getInt("id",0));
+    private void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(sqLiteHelper.getName());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -116,7 +116,7 @@ public class AddVehicleFragment extends Fragment {
                             "Code: " + response.code(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    user = response.body();
+                  user = response.body();
                 }
             }
 
@@ -129,6 +129,17 @@ public class AddVehicleFragment extends Fragment {
                 Log.i("InfoLog",t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentDataListener) {
+            fragmentDataListener = (FragmentDataListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragment1DataListener");
+        }
     }
 
 }

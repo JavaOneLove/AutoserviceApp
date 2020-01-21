@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,6 +49,17 @@ public class UserListFragment extends ListFragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         getUserList();
         usersList = view.findViewById(android.R.id.list);
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    User user = (User) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
         return view;
     }
 
@@ -65,7 +77,7 @@ public class UserListFragment extends ListFragment {
                 else {
                     users.addAll(response.body());
                     for (User user: users) {
-                        Log.i("myLogs",user.getUsername() + user.getRoles().toString());
+                        Log.i("myLogs",user.getUsername() + user.getRole());
                     }
                     UserListAdapter adapter = new UserListAdapter(getActivity(),
                             R.layout.user_list_item, users);

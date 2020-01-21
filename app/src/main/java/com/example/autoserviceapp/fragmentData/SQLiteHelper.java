@@ -74,4 +74,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             return 0;
         }
     }
+    public String getName(){
+        db = getWritableDatabase();
+        Log.d(LOG_TAG, "--- Rows in User: ---");
+        Cursor c = db.query("User", null, null, null, null, null, null);
+        if (c.moveToFirst()) {
+            int idColIndex = c.getColumnIndex("Username");
+            String name = c.getString(idColIndex);
+            Log.d(LOG_TAG, name);
+            c.close();
+            db.close();
+            return name;
+        } else {
+            Log.d(LOG_TAG, "0 rows");
+            c.close();
+            db.close();
+            return null;
+        }
+    }
 }

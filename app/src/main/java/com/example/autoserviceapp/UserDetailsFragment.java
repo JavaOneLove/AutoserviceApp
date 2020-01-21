@@ -5,12 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.autoserviceapp.fragmentData.SQLiteHelper;
+import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 
 
 public class UserDetailsFragment extends Fragment {
 
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private SQLiteHelper sqLiteHelper;
+    private TextView textId,textEmail,textPass,textRole;
 
     public UserDetailsFragment() {
         // Required empty public constructor
