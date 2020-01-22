@@ -31,6 +31,7 @@ public class UserDetailsFragment extends Fragment {
     private TextView textId,textEmail,textPass,textRole,textUsername;
     static final String KEY = "text";
     private User user;
+    private String id;
 
     public UserDetailsFragment() {
         // Required empty public constructor
@@ -48,7 +49,7 @@ public class UserDetailsFragment extends Fragment {
         textUsername =view.findViewById(R.id.textUsernameUser);
         textRole = view .findViewById(R.id.textUserRole);
         Button buttonDeleteUser = view.findViewById(R.id.buttonDeleteUser);
-        String id = getArguments().getString(KEY);
+        id = getArguments().getString(KEY);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -88,7 +89,7 @@ public class UserDetailsFragment extends Fragment {
     }
 
     private void getUserDetails(){
-        Call<User> call =jsonPlaceHolderApi.getUserDetails(getArguments().getInt(KEY));
+        Call<User> call =jsonPlaceHolderApi.getUserDetails(Integer.parseInt(id));
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -99,12 +100,12 @@ public class UserDetailsFragment extends Fragment {
                     toast.show();
                 }
                 user = response.body();
-                Log.i("MyLog", user.getUsername());
-                //textId.setText(user.getId());
-               // textEmail.setText(user.getEmail());
-               // textPass.setText(user.getPassword());
-                //textUsername.setText(user.getUsername());
-               // textRole.setText(user.getRole());
+                Log.i("MyLog", Integer.toString(user.getId()));
+                textId.setText(Integer.toString(user.getId()));
+                textEmail.setText(user.getEmail());
+                textPass.setText(user.getPassword());
+                textUsername.setText(user.getUsername());
+                textRole.setText(user.getRole());
             }
 
             @Override

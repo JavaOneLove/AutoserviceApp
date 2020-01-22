@@ -2,6 +2,7 @@ package com.example.autoserviceapp;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,16 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class OrderDetailsManagerFragment extends Fragment {
-    static final String KEY = "";
+    static final String KEY = "text";
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private Order order;
     private TextView textHeader,textVehicle,textDate;
     private TextInputEditText textComment;
-
-
-    public OrderDetailsManagerFragment() {
-        // Required empty public constructor
-    }
+    private String id;
 
 
     @Override
@@ -43,6 +40,11 @@ public class OrderDetailsManagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_order_details_manager, container, false);
         Button buttonAccept = view.findViewById(R.id.buttonAccept);
         Button buttonDeni = view.findViewById(R.id.buttonDeni);
+        textHeader = view.findViewById(R.id.textHeader);
+        textVehicle = view.findViewById(R.id.textVehicle);
+        textDate = view.findViewById(R.id.currentDateTime);
+        textComment =view.findViewById(R.id.textComment);
+        id = getArguments().getString(KEY);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -53,12 +55,14 @@ public class OrderDetailsManagerFragment extends Fragment {
         buttonAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                order.setStatus("Завершен");
                 updateOrder(order);
             }
         });
         buttonDeni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                order.setStatus("Отклонен");
                 updateOrder(order);
             }
         });
@@ -89,7 +93,7 @@ public class OrderDetailsManagerFragment extends Fragment {
     }
 
     private void getOrderDetails(){
-        Call<Order> call =jsonPlaceHolderApi.getOrderDetails(getArguments().getInt(KEY));
+        Call<Order> call =jsonPlaceHolderApi.getOrderDetails(Integer.parseInt(id));
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
@@ -100,7 +104,11 @@ public class OrderDetailsManagerFragment extends Fragment {
                     toast.show();
                 }
                 order = response.body();
-
+                Log.i("MyLog", Integer.toString(order.getId()));
+                textHeader.setText(order.getWork());
+                textVehicle.setText(order.getPrimaryVehicle().getMark());
+                textDate.setText(order.getDate());
+                textComment.setText(order.getComment());
             }
 
             @Override

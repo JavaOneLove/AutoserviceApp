@@ -172,7 +172,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
 
     @Override
     public void openOrderDetailsManagerFragment(String text) {
-
+        OrderDetailsManagerFragment fragment = new OrderDetailsManagerFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString(fragment.KEY,text);
+        fragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     public void getUserDetailsByName(String name){

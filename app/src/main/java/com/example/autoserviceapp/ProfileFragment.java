@@ -126,7 +126,7 @@ public class ProfileFragment extends Fragment {
                 }
                 vehicleList.addAll(response.body());
                 List<Vehicle> userVehicles = new ArrayList<>();
-                if (!vehicleList.isEmpty()) {
+               if (!vehicleList.isEmpty()) {
                     for (Vehicle vehicle : vehicleList) {
                         if (vehicle.getPrimaryUser().getId() == user.getId()) {
                             userVehicles.add(vehicle);

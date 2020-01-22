@@ -8,7 +8,6 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -48,7 +47,7 @@ public interface JsonPlaceHolderApi {
     Call<Order> createOrder(@Body Order order);
 
     @Headers("Content-Type: application/json")
-    @DELETE("home/deleteUser")
+    @POST("home/deleteUser")
     Call<User> deleteUser(@Body User user);
 
     @Headers("Content-Type: application/json")
