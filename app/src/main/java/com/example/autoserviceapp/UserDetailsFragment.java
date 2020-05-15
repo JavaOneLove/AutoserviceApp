@@ -1,6 +1,8 @@
 package com.example.autoserviceapp;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -88,8 +90,13 @@ public class UserDetailsFragment extends Fragment {
         });
     }
 
+    private String loadToken() {
+        SharedPreferences sPref = getActivity().getSharedPreferences("token", Context.MODE_PRIVATE);
+        return sPref.getString("access_token", "null");
+    }
+
     private void getUserDetails(){
-        Call<User> call =jsonPlaceHolderApi.getUserDetails(Integer.parseInt(id));
+        Call<User> call =jsonPlaceHolderApi.getUserDetails("Bearer_" + loadToken(),Integer.parseInt(id));
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -100,12 +107,12 @@ public class UserDetailsFragment extends Fragment {
                     toast.show();
                 }
                 user = response.body();
-                Log.i("MyLog", Integer.toString(user.getId()));
-                textId.setText(Integer.toString(user.getId()));
+                Log.i("UserDetailsFragment", Long.toString(user.getId()));
+                textId.setText(Long.toString(user.getId()));
                 textEmail.setText(user.getEmail());
                 textPass.setText(user.getPassword());
                 textUsername.setText(user.getUsername());
-                textRole.setText(user.getRole());
+                textRole.setText(user.getRoles().get(0).getName());
             }
 
             @Override

@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.autoserviceapp.adapter.VehicleListAdapter;
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
-import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.model.Vehicle;
@@ -50,7 +49,6 @@ public class OrderDetailsFragment extends Fragment {
     static final String KEY = "";
     static final String Status = "В обработке";
     private User user;
-    private SQLiteHelper sqLiteHelper;
 
 
     @Override
@@ -58,7 +56,6 @@ public class OrderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_details, container, false);
         currentDateTime = view.findViewById(R.id.currentDateTime);
-        sqLiteHelper = new SQLiteHelper(getContext());
         setInitialDateTime();
         Button buttonDate = view.findViewById(R.id.button3);
         spinner = view.findViewById(R.id.vehicleChoose);
@@ -98,7 +95,7 @@ public class OrderDetailsFragment extends Fragment {
                 setDate(v);
             }
         });
-        getUserDetails();
+        //getUserDetails();
         getVehicleList();
         return view;
     }
@@ -194,8 +191,8 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
     }
-    private void getUserDetails(){
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(sqLiteHelper.getName());
+    /*private void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -218,7 +215,7 @@ public class OrderDetailsFragment extends Fragment {
                 Log.i("InfoLog",t.getMessage());
             }
         });
-    }
+    }*/
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

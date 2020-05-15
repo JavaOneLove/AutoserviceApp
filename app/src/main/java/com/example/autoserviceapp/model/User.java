@@ -3,8 +3,10 @@ package com.example.autoserviceapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
-    private int id;
+    private Long id;
     @SerializedName("username")
     private String Username;
     @SerializedName("email")
@@ -12,14 +14,25 @@ public class User {
     @SerializedName("password")
     private String Password;
 
-    private String role;
+    private String token;
 
-    public User(int id, String username, String email, String password, String role) {
+    private List<Role> roles;
+
+    public User(Long id, String username, String email, String password, String token, Role role) {
         this.id = id;
         Username = username;
         Email = email;
         Password = password;
-        this.role = role;
+        this.token = token;
+        this.roles = roles;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public User(String username, String email, String password) {
@@ -28,7 +41,7 @@ public class User {
         this.Password = password;
     }
 
-    public User(int id, String username, String email, String password) {
+    public User(Long id, String username, String email, String password) {
         this.id = id;
         Username = username;
         Email = email;
@@ -36,14 +49,6 @@ public class User {
     }
 
     public User() {
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEmail() {
@@ -62,11 +67,11 @@ public class User {
         this.Password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,5 +81,13 @@ public class User {
 
     public void setUsername(String username) {
         Username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

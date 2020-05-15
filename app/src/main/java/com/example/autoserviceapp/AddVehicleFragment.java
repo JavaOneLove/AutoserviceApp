@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
-import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.model.Vehicle;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
@@ -35,14 +34,12 @@ public class AddVehicleFragment extends Fragment {
     private EditText editModel;
     private EditText editColor;
     private EditText editDate;
-    private SQLiteHelper sqLiteHelper;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_vehicle, container, false);
-        sqLiteHelper = new SQLiteHelper(getContext());
         editMark = view.findViewById(R.id.editMark);
         editModel = view.findViewById(R.id.editModel);
         editColor = view.findViewById(R.id.editColor);
@@ -56,7 +53,7 @@ public class AddVehicleFragment extends Fragment {
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        getUserDetails();
+       // getUserDetails();
         buttonDateChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,8 +103,8 @@ public class AddVehicleFragment extends Fragment {
             }
         });
     }
-    private void getUserDetails(){
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(sqLiteHelper.getName());
+    /*private void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -130,7 +127,7 @@ public class AddVehicleFragment extends Fragment {
                 Log.i("InfoLog",t.getMessage());
             }
         });
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {

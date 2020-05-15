@@ -41,7 +41,7 @@ public class UserListAdapter extends ArrayAdapter<User> {
         final User user = userList.get(position);
 
         viewHolder.nameView.setText(user.getUsername());
-        viewHolder.IdView.setText(Integer.toString(user.getId()));
+        viewHolder.IdView.setText(Long.toString(user.getId()));
 
         return convertView;
     }

@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.autoserviceapp.adapter.OrderListAdapter;
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
-import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.Order;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
@@ -36,27 +35,25 @@ public class OrderFragment extends Fragment {
     private FragmentDataListener fragmentDataListener;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private ListView ordersList;
-    private SQLiteHelper sqLiteHelper;
     private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order, container, false);
-        sqLiteHelper = new SQLiteHelper(getContext());
         ordersList = view.findViewById(android.R.id.list);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        getUserDetails();
+        //getUserDetails();
         getOrderList();
         return view;
     }
 
-    private void getUserDetails(){
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(sqLiteHelper.getName());
+    /*private void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -78,7 +75,7 @@ public class OrderFragment extends Fragment {
                 Log.i("InfoLog",t.getMessage());
             }
         });
-    }
+    }*/
 
     private void getOrderList(){
         Call<List<Order>> call = jsonPlaceHolderApi.getOrderList();
@@ -95,7 +92,7 @@ public class OrderFragment extends Fragment {
                 orders.addAll(response.body());
                 List<Order> selectOrders = new ArrayList<>();
                 List<Order> endList =new ArrayList<>();
-                if(user.getRole().equals("USER")){
+                if(user.getRoles().toString().equals("USER")){
                     for (Order order: orders) {
                         if(order.getPrimaryUser().getId() == user.getId()){
                             selectOrders.add(order);

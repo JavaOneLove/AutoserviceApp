@@ -1,6 +1,7 @@
 package com.example.autoserviceapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
-import com.example.autoserviceapp.fragmentData.SQLiteHelper;
+import com.example.autoserviceapp.model.Role;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,15 +26,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity implements FragmentDataListener {
     JsonPlaceHolderApi jsonPlaceHolderApi;
-    public String role = "NO_AUTH";
+    Role role;
     BottomNavigationView bottomNavigationView;// 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
-    SQLiteHelper sqLiteHelper;
+    SharedPreferences sPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sqLiteHelper = new SQLiteHelper(getApplicationContext());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -44,15 +44,17 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, fragment);
                 fragmentTransaction.commit();
-
-
-                String name = sqLiteHelper.getName();
+                role = new Role();
+                role.setName("NO_AUTH");
+                getUserDetailsByName(loadUsername());
+          /*      String name = sqLiteHelper.getName();
                 if(name != null){
                     getUserDetailsByName(name);
                 }
                 else{
                     getUserMenu("NO_AUTH");
-                }
+                }*/
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -114,7 +116,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
     }
     public void getUserMenu(String role){
         switch (role){
-            case ("NO_AUTH"):
+            case("NO_AUTH"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_no_auth);
                 break;
             case("USER"):
@@ -182,8 +184,18 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
         fragmentTransaction.commit();
     }
 
+    private String loadToken() {
+        sPref = getSharedPreferences("token", MODE_PRIVATE);
+        return sPref.getString("access_token", "null");
+    }
+    private String loadUsername() {
+        sPref = getSharedPreferences("username", MODE_PRIVATE);
+        return sPref.getString("entered_username", "null");
+    }
+
     public void getUserDetailsByName(String name){
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(name);
+        String token = loadToken();
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName("Bearer_" + token,name);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -193,13 +205,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                     toast.setGravity(Gravity.CENTER, 0, 0);
                 }
                 User user = response.body();
-                Log.i("MyLOG", user.getRole());
-                if (user != null){
-                    role =  user.getRole();
-                } else {
-                    role = "NO_AUTH";
+                if (user != null) {
+                    if (role != null) {
+                        role = user.getRoles().get(0);
+                        Log.i("Role:", user.getRoles().get(0).getName());
+                    }
                 }
-                getUserMenu(role);
+                getUserMenu(role.getName());
             }
 
             @Override

@@ -1,6 +1,7 @@
 package com.example.autoserviceapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -75,8 +76,13 @@ public class UserListFragment extends ListFragment {
         return view;
     }
 
+    private String loadToken() {
+        SharedPreferences sPref = getActivity().getSharedPreferences("token", Context.MODE_PRIVATE);
+        return sPref.getString("access_token", "null");
+    }
+
     private void getUserList(){
-        Call<List<User>> call = jsonPlaceHolderApi.getUsersList();
+        Call<List<User>> call = jsonPlaceHolderApi.getUsersList("Bearer_" + loadToken());
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -96,9 +102,9 @@ public class UserListFragment extends ListFragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         User selectUser = (User) parent.getItemAtPosition(position);
-                      int text =  selectUser.getId();
+                      Long text =  selectUser.getId();
                         Log.i("MyLOG",selectUser.getUsername());
-                        fragmentDataListener.openUserDetailsFragment(Integer.toString(text));
+                        fragmentDataListener.openUserDetailsFragment(Long.toString(text));
                     }
                 });
                 }

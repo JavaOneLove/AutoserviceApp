@@ -1,6 +1,8 @@
 package com.example.autoserviceapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.autoserviceapp.fragmentData.SQLiteHelper;
+import com.example.autoserviceapp.model.Login;
+import com.example.autoserviceapp.model.TestUser;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 
 import retrofit2.Call;
@@ -22,6 +26,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private SharedPreferences sPref;
     TextView RedirectToRegistration;
     TextView textEmail;
     TextView textPassword;
@@ -62,12 +68,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @SuppressLint("LongLogTag")
+    private void saveToken(String access_token) {
+        sPref = getSharedPreferences("token", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("access_token", access_token);
+        Log.i("access_token save", access_token);
+        ed.commit();
+    }
+    private void saveUsername(String entered_username) {
+        sPref = getSharedPreferences("username", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("entered_username",entered_username);
+        Log.i("entered_username save", entered_username);
+        ed.commit();
+    }
+
     public void Login(){
-        Log.i("MyLOG -------",textEmail.getText().toString());
-        Call<Integer> call = jsonPlaceHolderApi.Login(textEmail.getText().toString(),textPassword.getText().toString());
-        call.enqueue(new Callback<Integer>() {
+    Login login = new Login(textEmail.getText().toString(), textPassword.getText().toString());
+        Call<TestUser> call = jsonPlaceHolderApi.login(login);
+        call.enqueue(new Callback<TestUser>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<TestUser> call, Response<TestUser> response) {
 
                 if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
@@ -75,17 +97,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                if (response.code() == 200) {
-                    sqLiteHelper.onInsert(textEmail.getText().toString(),
-                            textEmail.getText().toString(),
-                            textPassword.getText().toString());
+
                     Intent backHome = new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(backHome);
-                }
+                    if (response.body() != null) {
+                        String token = response.body().getToken();
+                        String username = response.body().getEmail();
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Token: " + token + " " + username , Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        saveToken(token);
+                        saveUsername(username);
+                    }
+
             }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<TestUser> call, Throwable t) {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         t.getMessage(), Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);

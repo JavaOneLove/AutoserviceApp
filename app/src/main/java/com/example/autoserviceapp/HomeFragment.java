@@ -3,6 +3,7 @@ package com.example.autoserviceapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.autoserviceapp.fragmentData.FragmentDataListener;
-import com.example.autoserviceapp.fragmentData.SQLiteHelper;
 import com.example.autoserviceapp.model.User;
 import com.example.autoserviceapp.retrofitInterfaceAPI.JsonPlaceHolderApi;
 
@@ -30,8 +30,8 @@ public class HomeFragment extends Fragment {
 
     private FragmentDataListener fragmentDataListener;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private SQLiteHelper sqLiteHelper;
     private User user;
+    private SharedPreferences sPref;
     private String role;
 
     @Override
@@ -44,14 +44,12 @@ public class HomeFragment extends Fragment {
         Button buttonPainting = view.findViewById(R.id.buttonPainting);
         Button buttonRepairBody = view.findViewById(R.id.buttonRepairBody);
         Button buttonTireService = view.findViewById(R.id.buttonTireService);
-        sqLiteHelper = new SQLiteHelper(getContext());
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        role = sqLiteHelper.getName();
         if(role != null){
         getUserDetailsByName(role);
         }
@@ -116,8 +114,14 @@ public class HomeFragment extends Fragment {
        return view;
     }
 
+    private String loadToken() {
+        SharedPreferences sPref = getActivity().getSharedPreferences("token", Context.MODE_PRIVATE);
+        return sPref.getString("access_token", "null");
+    }
+
     private void getUserDetailsByName(String role){
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(role);
+        String token = loadToken();
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(token,role);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
