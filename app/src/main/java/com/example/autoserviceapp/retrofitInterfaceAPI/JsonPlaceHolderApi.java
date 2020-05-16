@@ -20,24 +20,8 @@ import retrofit2.http.Path;
 public interface JsonPlaceHolderApi {
 
     @Headers("Content-Type: application/json")
-    @POST("registration")
-    Call<User> Registration(@Body User user);
-
-    @Headers("Content-Type: application/json")
-    @GET("api/admin/userList")
-    Call<List<User>> getUsersList(@Header("Authorization") String authorization);
-
-    @Headers("Content-Type: application/json")
-    @GET("home/userDetails/{id}")
-    Call<User> getUserDetails(@Header("Authorization") String authorization, @Path("id") int id);
-
-    @Headers("Content-Type: application/json")
     @GET("home/orderDetails/{id}")
     Call<Order> getOrderDetails(@Path("id") int id);
-
-    @Headers("Content-Type: application/json")
-    @GET("home/userDetailsName/{name}")
-    Call<User> getUserDetailsByName(@Header("Authorization") String authorization, @Path("name") String username);
 
     @Headers("Content-Type: application/json")
     @POST("home/createOrder")
@@ -48,12 +32,8 @@ public interface JsonPlaceHolderApi {
     Call<User> deleteUser(@Body User user);
 
     @Headers("Content-Type: application/json")
-    @PUT("home/updateUser")
-    Call<User> updateUser(@Body User user);
-
-    @Headers("Content-Type: application/json")
     @GET("home/vehicleList")
-    Call<List<Vehicle>> getVehicleList(@Header("Authorization") String authorization);
+    Call<List<Vehicle>> getVehicleList();
 
     @Headers("Content-Type: application/json")
     @POST("home/createVehicle")
@@ -66,9 +46,37 @@ public interface JsonPlaceHolderApi {
     @Headers("Content-Type: application/json")
     @POST("home/updateOrder")
     Call<Order> updateOrder(@Body Order order);
-
+ //updated
     @Headers("Content-Type: application/json")
     @POST("api/auth/login")
     Call<TestUser> login(@Body Login login);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/reg/registration")
+    Call<User> Registration(@Body User user);
+
+    @Headers("Content-Type: application/json")
+    @GET("api/user/getUserVehicle")
+    Call<List<Vehicle>> getUserVehicle(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @GET("api/user/userDetailsName")
+    Call<User> getUserDetails(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @PUT("api/user/updateUser")
+    Call<User> updateUser(@Header("Authorization") String authorization,@Body User user);
+
+    @Headers("Content-Type: application/json")
+    @GET("api/admin/userDetailsName/{name}")
+    Call<User> getUserDetailsByName(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @GET("api/admin/userList")
+    Call<List<User>> getUsersList(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @GET("api/admin/userDetails/{id}")
+    Call<User> getUserDetails(@Header("Authorization") String authorization, @Path("id") Long id);
 
 }
