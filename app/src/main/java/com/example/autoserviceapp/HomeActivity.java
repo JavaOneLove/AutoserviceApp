@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeActivity extends AppCompatActivity implements FragmentDataListener {
     JsonPlaceHolderApi jsonPlaceHolderApi;
     Role role;
-    BottomNavigationView bottomNavigationView;// 0 is no auth, 1 is auth, 3 is manager, 2 is administrator
+    BottomNavigationView bottomNavigationView;
     SharedPreferences sPref;
 
     @Override
@@ -46,14 +46,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                 fragmentTransaction.commit();
                 role = new Role();
                 role.setName("NO_AUTH");
-                getUserDetailsByName(loadUsername());
-          /*      String name = sqLiteHelper.getName();
-                if(name != null){
-                    getUserDetailsByName(name);
-                }
-                else{
-                    getUserMenu("NO_AUTH");
-                }*/
+                getUserDetails();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -119,13 +112,13 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
             case("NO_AUTH"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_no_auth);
                 break;
-            case("USER"):
+            case("ROLE_USER"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_auth);
                 break;
-            case("ADMIN"):
+            case("ROLE_ADMIN"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_admin);
                 break;
-            case ("MANAGER"):
+            case ("ROLE_MANAGER"):
                 bottomNavigationView.inflateMenu(R.menu.menu_bottom_manager);
                 break;
         }
@@ -188,14 +181,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
         sPref = getSharedPreferences("token", MODE_PRIVATE);
         return sPref.getString("access_token", "null");
     }
-    private String loadUsername() {
-        sPref = getSharedPreferences("username", MODE_PRIVATE);
-        return sPref.getString("entered_username", "null");
-    }
 
-    public void getUserDetailsByName(String name){
+    public void getUserDetails(){
         String token = loadToken();
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName("Bearer_" + token,name);
+        Call<User> call = jsonPlaceHolderApi.getUserDetails("Bearer_" + token);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -206,6 +195,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDataListe
                 }
                 User user = response.body();
                 if (user != null) {
+                    Log.i("Role:", user.getRoles().get(0).getName());
                     if (role != null) {
                         role = user.getRoles().get(0);
                         Log.i("Role:", user.getRoles().get(0).getName());

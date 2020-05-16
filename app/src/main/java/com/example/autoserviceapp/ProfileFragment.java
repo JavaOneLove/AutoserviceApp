@@ -92,8 +92,8 @@ public class ProfileFragment extends Fragment {
                 .build();
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        //getUserDetailsByName();
-        getVehicleList();
+        getUserDetails();
+        getUserVehicle();
         AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -109,9 +109,9 @@ public class ProfileFragment extends Fragment {
         return v;
     }
 
-    private void getVehicleList(){
+    private void getUserVehicle(){
         final List<Vehicle> vehicleList = new ArrayList<>();
-        Call<List<Vehicle>> call = jsonPlaceHolderApi.getVehicleList();
+        Call<List<Vehicle>> call = jsonPlaceHolderApi.getUserVehicle("Bearer_" + loadToken());
         call.enqueue(new Callback<List<Vehicle>>() {
             @Override
             public void onResponse(Call<List<Vehicle>> call, Response<List<Vehicle>> response) {
@@ -123,15 +123,7 @@ public class ProfileFragment extends Fragment {
                     return;
                 }
                 vehicleList.addAll(response.body());
-                List<Vehicle> userVehicles = new ArrayList<>();
-               if (!vehicleList.isEmpty()) {
-                    for (Vehicle vehicle : vehicleList) {
-                        if (vehicle.getPrimaryUser().getId() == user.getId()) {
-                            userVehicles.add(vehicle);
-                        }
-                    }
-                }
-                VehicleListAdapter adapter = new VehicleListAdapter(getActivity(),R.layout.vehicle_list_item,userVehicles);
+                VehicleListAdapter adapter = new VehicleListAdapter(getActivity(),R.layout.vehicle_list_item,vehicleList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
             }
@@ -149,7 +141,7 @@ public class ProfileFragment extends Fragment {
 
     private void updateUser(){
         User user = new User(editUsername.getText().toString(),editEmail.getText().toString(),editPassword.getText().toString());
-        Call<User> call = jsonPlaceHolderApi.updateUser(user);
+        Call<User> call = jsonPlaceHolderApi.updateUser("Bearer_" + loadToken(),user);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -160,6 +152,8 @@ public class ProfileFragment extends Fragment {
                             "Code: " + response.code(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                    Intent HomeActivity = new Intent(getActivity(),HomeActivity.class);
+                    startActivity(HomeActivity);
                     return;
                 }
             }
@@ -179,7 +173,6 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sPref = getActivity().getSharedPreferences("token", Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString("access_token", "null");
-        ed.putString("entered_username", "null");
         ed.commit();
     }
 
@@ -187,13 +180,9 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sPref = getActivity().getSharedPreferences("token", Context.MODE_PRIVATE);
         return sPref.getString("access_token", "null");
     }
-    private String loadUsername() {
-        SharedPreferences sPref = getActivity().getSharedPreferences("username", Context.MODE_PRIVATE);
-        return sPref.getString("entered_username", "null");
-    }
 
-    private void getUserDetailsByName(){
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName("Bearer_" + loadToken(),loadUsername());
+    private void getUserDetails(){
+        Call<User> call = jsonPlaceHolderApi.getUserDetails("Bearer_" + loadToken());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -206,7 +195,6 @@ public class ProfileFragment extends Fragment {
                user = response.body();
                 editUsername.setText(user.getUsername());
                 editEmail.setText(user.getEmail());
-                editPassword.setText(user.getPassword());
             }
 
             @Override

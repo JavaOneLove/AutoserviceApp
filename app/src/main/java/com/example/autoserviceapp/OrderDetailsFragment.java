@@ -47,7 +47,7 @@ public class OrderDetailsFragment extends Fragment {
     private TextView textHeader;
     private TextInputEditText textComment;
     static final String KEY = "";
-    static final String Status = "В обработке";
+    private static final String Status = "В обработке";
     private User user;
 
 

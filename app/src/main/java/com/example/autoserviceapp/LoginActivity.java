@@ -76,13 +76,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.i("access_token save", access_token);
         ed.commit();
     }
-    private void saveUsername(String entered_username) {
-        sPref = getSharedPreferences("username", MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString("entered_username",entered_username);
-        Log.i("entered_username save", entered_username);
-        ed.commit();
-    }
 
     public void Login(){
     Login login = new Login(textEmail.getText().toString(), textPassword.getText().toString());
@@ -108,7 +101,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                         saveToken(token);
-                        saveUsername(username);
                     }
 
             }

@@ -38,6 +38,7 @@
         android:layout_marginRight="49dp"
         android:background="@drawable/fileds"
         android:hint="Имя"
+        android:inputType="text"
         android:padding="15sp" />
 
     <EditText
@@ -56,7 +57,7 @@
         android:layout_marginRight="49dp"
         android:background="@drawable/fileds"
         android:hint="Пароль"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:padding="15sp" />
 
     <EditText
@@ -96,19 +97,12 @@
         android:layout_below="@+id/editTextPassword"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="200dp"
-        android:layout_marginLeft="260dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginLeft="232dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button"
         android:text="Изменить"
         android:textColor="#C4BDBD" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="417dp" />
 
     <Button
         android:id="@+id/buttonUpdateVehicle"
@@ -117,9 +111,9 @@
         android:layout_below="@+id/spinner"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="58dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
         android:background="@drawable/button"
         android:text="Изменить"
         android:textColor="#BEB9B9" />
@@ -129,12 +123,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginRight="37dp"
+        android:layout_marginRight="40dp"
         android:layout_toStartOf="@+id/buttonUpdateVehicle"
         android:layout_toLeftOf="@+id/buttonUpdateVehicle"
         android:background="@drawable/button"
         android:text="Добавить"
         android:textColor="#BBB6B6" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="457dp" />
+
 </RelativeLayout>

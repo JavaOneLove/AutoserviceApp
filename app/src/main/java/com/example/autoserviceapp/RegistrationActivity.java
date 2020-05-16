@@ -25,6 +25,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     Button RegUser;
     TextView EmailText;
     TextView PasswordText;
+    TextView RePasswordText;
+    TextView UsernameText;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration);
@@ -32,7 +34,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         RegUser = findViewById(R.id.buttonRegistration);
         EmailText = findViewById(R.id.editMailRegistration);
         PasswordText = findViewById(R.id.editPasswordRegistration);
-
+        UsernameText = findViewById(R.id.editTextUsername);
+        RePasswordText = findViewById(R.id.editRePasswordRegistration);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.13:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,31 +44,40 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void Registration(){
-        User user = new User("",EmailText.getText().toString(),PasswordText.getText().toString());
-        Call<User> call = jsonPlaceHolderApi.Registration(user);
+        if (PasswordText.getText().toString().equals(RePasswordText.getText().toString())) {
+            User user = new User(UsernameText.getText().toString(),
+                    EmailText.getText().toString(),
+                    PasswordText.getText().toString());
 
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            Call<User> call = jsonPlaceHolderApi.Registration(user);
 
-                if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Code: " + response.code(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                    return;
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+
+                    if (!response.isSuccessful()) {
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "Code: " + response.code(), Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        return;
+                    }
+
                 }
 
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        t.getMessage(), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
-        });
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            t.getMessage(), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            });
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(),"Пароли не совпадают", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 
     @Override

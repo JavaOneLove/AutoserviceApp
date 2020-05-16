@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         if(role != null){
-        getUserDetailsByName(role);
+        getUserDetailsByName();
         }
 
         buttonRepairEngine.setOnClickListener(new View.OnClickListener() {
@@ -119,9 +119,9 @@ public class HomeFragment extends Fragment {
         return sPref.getString("access_token", "null");
     }
 
-    private void getUserDetailsByName(String role){
+    private void getUserDetailsByName(){
         String token = loadToken();
-        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(token,role);
+        Call<User> call = jsonPlaceHolderApi.getUserDetailsByName(token);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
